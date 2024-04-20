@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Head, router } from '@inertiajs/react';
+import { Link, router, Head } from '@inertiajs/react';
 import * as XLSX from "xlsx";
 import Card from "../Components/Card";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 
 export default function Homepage(props) {
     console.log(props.generated)
     const [data, setData] = useState([]);
-    console.log(data)
+    const [generating, setGenerating] = useState(false);
 
     const handleFileUpload = (e) => {
         const reader = new FileReader();
@@ -17,20 +19,19 @@ export default function Homepage(props) {
             const sheetName = workbook.SheetNames[0]
             const sheet = workbook.Sheets[sheetName]
             const parsedData = XLSX.utils.sheet_to_json(sheet)
-            console.log(parsedData)
             setData(parsedData)
         }
     }
 
     const handleSubmit = () => {
+        setGenerating(true)
         router.post('/', data)
     }
 
     return(
         <>
-            <div className="navbar bg-neutral text-neutral-content">
-                <button className="btn btn-ghost text-xl">Jasa raharja insurance</button>
-            </div>
+            <Head title="Home" />
+            <Navbar></Navbar>
 
             <div className="flex justify-center m-8">
                 <input type="file" accept=".xlsx, .xls" className="file-input file-input-bordered file-input-info w-full max-w-xs" onChange={handleFileUpload}/> 
@@ -72,15 +73,24 @@ export default function Homepage(props) {
                     </table>
                 </div>
             </div>
-            {data.length > 0 && props.generated == null ? 
+            {data.length > 0 && props.generated == null && !generating ? 
                 <div className='flex justify-center my-3'>
-                    <button type="button" className="btn btn-success" onClick={handleSubmit}>Generate card</button>
+                    <button type="button" className="btn btn-success" onClick={handleSubmit}>Buat kartu</button>
+                </div>
+            : ""}
+
+            {generating && props.generated == null ? 
+                <div className='flex justify-center my-3'>
+                    <button type="button" className="btn btn-success" disabled="disabled">Membuat kartu...</button>
                 </div>
             : ""}
 
             {props.generated != null ?
-                <div className='flex justify-center my-3'>
-                    <p className="text-green-500 font-bold mb-3">Card generated</p>
+                <div className='flex justify-evenly mb-8'>
+                    
+                    <Link href="/history" method="GET" as="button"><button className="btn btn-outline btn-info w-64">&lt;&lt; Lihat riwayat pembuatan kartu</button></Link>
+                    <p className="text-green-500 font-bold">Kartu berhasil dibuat</p>
+                    <Link href="/" method="GET" as="button"><button className="btn btn-outline btn-info w-64">Hasilkan kartu lagi &gt;&gt;</button></Link>
                 </div>
             : ""}
             
@@ -93,7 +103,7 @@ export default function Homepage(props) {
                         : ""}
                 </div>
             </div>
-
+            <Footer></Footer>               
         </>
     );
 }

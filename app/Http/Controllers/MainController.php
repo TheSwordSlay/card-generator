@@ -47,4 +47,11 @@ class MainController extends Controller
             "generated" => $cards,
         ]);
     }
+
+    public function history() {
+        $cards = Member::all();
+        return Inertia::render('History', [
+            "cards" => $cards,
+        ]);
+    }
 }

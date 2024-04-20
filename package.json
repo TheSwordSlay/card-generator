@@ -21,9 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "html2canvas": "^1.4.1",
         "html2canvas-pro": "^1.4.3",
-        "react-component-export-image": "^1.0.6",
         "xlsx": "^0.18.5"
     }
 }

@@ -30,5 +30,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/', [MainController::class, 'generate']);
+Route::get('/history', [MainController::class, 'history']);
 
 require __DIR__.'/auth.php';

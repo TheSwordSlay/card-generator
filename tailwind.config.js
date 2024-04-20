@@ -15,6 +15,9 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'logo-color':'#00357B'
+            }
         },
     },
     plugins: [forms, require("daisyui")],

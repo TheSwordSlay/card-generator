@@ -29,7 +29,7 @@ export default function Card({info}) {
             <div ref={printRef} className='items-center text-center rounded px-3 py-3 w-96 font-bold border-2 border-slate-950 rounded-lg'>
                     <h2>{info['Nama']}</h2>
                     <p className="my-2">{info['Nama perusahaan']}</p>
-                    {info["Jenis kartu"] == "Silver" ? 
+                    {info["Jenis kartu"].toLowerCase() == "silver" ? 
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <p className="text-xs text-right">A/B :{santunan[0].A}</p>
                             <p className="text-xs text-left">C :{santunan[0].C}</p>
@@ -38,7 +38,7 @@ export default function Card({info}) {
                         </div>
                     : ""}
 
-                    {info["Jenis kartu"] == "Gold" ? 
+                    {info["Jenis kartu"].toLowerCase() == "gold" ? 
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <p className="text-xs text-right">A/B :{santunan[1].A}</p>
                             <p className="text-xs text-left">C :{santunan[1].C}</p>
@@ -47,7 +47,7 @@ export default function Card({info}) {
                         </div>
                     : ""}
 
-                    {info["Jenis kartu"] == "Platinum" ? 
+                    {info["Jenis kartu"].toLowerCase() == "platinum" ? 
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <p className="text-xs text-right">A/B :{santunan[2].A}</p>
                             <p className="text-xs text-left">C :{santunan[2].C}</p>
