@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("mmyy");
             $table->integer("amount_created");
+            $table->string("yyyy");
             $table->timestamps();
         });
     }

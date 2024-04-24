@@ -20,12 +20,14 @@ class MainController extends Controller
         $todayMonth = Carbon::now()->format('m-Y');
         $todayMonth = str_replace("-",".",$todayMonth);
         $codeTemplate = "1000.".$todayMonth.".";
+        $todayYear = Carbon::now()->format('Y');
         $cardNumber = 0;
-        $cardsCreated = CardsCreated::all()->where('mmyy',$todayMonth)->toArray();
+        $cardsCreated = CardsCreated::all()->where('yyyy',$todayYear)->toArray();
         if(count($cardsCreated) == 0) {
             $countAmount = new CardsCreated();
             $countAmount->mmyy = $todayMonth;
             $countAmount->amount_created = count($request->all());
+            $countAmount->yyyy = $todayYear;
             $countAmount->save();
         } else {
             $countAmount = CardsCreated::where('mmyy', $todayMonth)->first();
