@@ -30,7 +30,7 @@ class MainController extends Controller
             $countAmount->yyyy = $todayYear;
             $countAmount->save();
         } else {
-            $countAmount = CardsCreated::where('mmyy', $todayMonth)->first();
+            $countAmount = CardsCreated::where('yyyy', $todayYear)->first();
             $cardNumber = $countAmount->amount_created;
             $countAmount->amount_created = $countAmount->amount_created + count($request->all());
             $countAmount->save();
